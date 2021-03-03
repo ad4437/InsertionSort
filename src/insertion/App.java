@@ -23,6 +23,8 @@ public class App {
 
             if (newCount > 25) {
                 System.out.println("Cannot exceed 25 elements");
+            } else if (newCount == 0) {
+                System.out.println("Cannot sort 0 elements");
             } else {
                 count = newCount;
                 int start;
@@ -38,17 +40,21 @@ public class App {
                     list = temp;
                 }
 
-                for (int i = start; i < count; i++) {
-                    list[i] = Integer.parseInt(input.substring(0, input.indexOf(",")));
-                    input = input.substring(input.indexOf(" ") + 1);
+                try {
+                    for (int i = start; i < count; i++) {
+                        list[i] = Integer.parseInt(input.substring(0, input.indexOf(",")));
+                        input = input.substring(input.indexOf(" ") + 1);
+                    }
+
+                    InsertionSort sort = new InsertionSort(list);
+                    sort.insertionSort(start);
+                    System.out.println("\n" + Arrays.toString(list));
+
+                    StatsReport report = new StatsReport(list);
+                    System.out.println(report.generate());
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid Input");
                 }
-
-                InsertionSort sort = new InsertionSort(list);
-                sort.insertionSort(start);
-                System.out.println("\n" + Arrays.toString(list));
-
-                StatsReport report = new StatsReport(list);
-                System.out.println(report.generate());
             }
 
             System.out.println("To add more items: \"add\"");
