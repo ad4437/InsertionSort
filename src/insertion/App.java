@@ -16,6 +16,8 @@ public class App {
             String input = in.nextLine() + ", ";
 
             int newCount = count;
+            int oldCount = count;
+            int[] oldList = list;
             for (char c : input.toCharArray()) {
                 if (c == ',')
                     newCount++;
@@ -54,6 +56,8 @@ public class App {
                     System.out.println(report.generate());
                 } catch (NumberFormatException e) {
                     System.out.println("Invalid Input");
+                    count = oldCount;
+                    list = oldList;
                 }
             }
 
